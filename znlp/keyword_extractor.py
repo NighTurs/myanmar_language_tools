@@ -8,10 +8,6 @@ from mm_segmenter import Segmenter
 from tfidf import TFIDF
 import operator
 import codecs
-import json
-import time
-import zsql
-import sys
 import re
 import os
 

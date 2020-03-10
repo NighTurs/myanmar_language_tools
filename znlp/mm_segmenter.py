@@ -11,7 +11,7 @@ import mm_tokenizer
 import mm_converter
 import mm_detector
 import codecs
-import json
+import argparse
 import re
 import os
 
@@ -170,3 +170,16 @@ class Segmenter():
 
 
         return segmented_words
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', required=True,
+                        help='Untokenized file with Myanmar text')
+    parser.add_argument('--output', required=True,
+                        help='Resulting tokenized file')
+    args = parser.parse_args()
+    segmenter = Segmenter()
+    with open(args.input, 'r') as fin, open(args.output, 'w') as fout:
+        for line in fin.readlines():
+            fout.write((' '.join(segmenter.segment(line))).encode('utf8'))
+            fout.write('\n')
